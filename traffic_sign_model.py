@@ -47,7 +47,7 @@ def train_model():
 
     with tf.Session() as sess:
         model = TrafficSignModel(sess)
-        model.train(X_train, y_train, X_valid, y_valid, epochs=2)
+        model.train(X_train, y_train, X_valid, y_valid, epochs=10)
 
 
 def test_accuracy():
