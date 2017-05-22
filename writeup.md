@@ -105,9 +105,12 @@ My final model consisted of the following layers:
 
 ####4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in model.py
+The code for training the model is located in traffic_sign_model.py.
 
-To train the model, I used an ....
+To train the model, I used the AdamOptimizer with a batch size of 64 and a learning rate of 0.001. 
+I trained for 20 epochs, but I only saved the model when results improved on validation data - so overfitting the training data would not be a problem. 
+Though there could be a problem with overfitting the smaller validation dataset, we'll be able to identify this when we do our final predictions the previously unseen test set.
+You can view the training code in `train_model` and `TrafficSignModel.train`.
 
 ####5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -135,7 +138,9 @@ It's worth noting there was noise on most of the photos, because they were water
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+The code for making predictions on my final model is located under  `Predict the Sign Type for Each Image` in `Traffic_Sign_Classifier.ipynb`.
+and in `TrafficSignModel.predict` in `traffic_sign_model.py`
+
 
 Here are the results of the prediction:
 
@@ -153,6 +158,12 @@ This compares unfavorably to the accuracy on the test set of .9333. This could r
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+The code for making predictions on my final model is located under `Display Prediction Certainties` in `Traffic_Sign_Classifier.ipynb`.
+
+The model is quite certain for `Speed Limit (60km)`, `Ahead Only`, and `No Entry` having over a 15% gap in probability between the chosen label and the next most likely option. 
+It's fairly certain for `Roundabout mandatory` with around an 8% gap between the first and second most likely choices.
+The model was very uncertain for the `Children Crossing` sign. 
+It predicted under %10 probability for all labels and the gap between the first and second option was just around %3. 
+This suggests that the image chosen was likely very different from the training images, and that we potentially do not have enough `Children Crossing` images.  
 
 ![Confidence of predictions for traffic signs from the web][prediction_confidence]:
